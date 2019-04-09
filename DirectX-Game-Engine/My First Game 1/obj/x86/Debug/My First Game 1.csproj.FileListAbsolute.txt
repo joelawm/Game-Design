@@ -1,0 +1,6 @@
+C:\Users\deltagi\Desktop\My First Game 1\My First Game 1\bin\Debug\My First Game 1.exe
+C:\Users\deltagi\Desktop\My First Game 1\My First Game 1\bin\Debug\My First Game 1.pdb
+C:\Users\deltagi\Desktop\My First Game 1\My First Game 1\obj\x86\Debug\My First Game 1.exe
+C:\Users\deltagi\Desktop\My First Game 1\My First Game 1\obj\x86\Debug\My First Game 1.pdb
+C:\Users\deltagi\Desktop\My First Game 1\My First Game 1\obj\x86\Debug\My First Game 1.csprojResolveAssemblyReference.cache
+C:\Users\deltagi\Desktop\My First Game 1\My First Game 1\bin\Debug\My First Game 1.exe.config

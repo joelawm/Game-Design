@@ -1,0 +1,408 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Win32;
+using System.IO;
+using System.Reflection;
+using System.Threading;
+using System.Diagnostics;
+
+namespace Arma_3_Scheduler
+{
+    class Program
+    {
+        static bool runningsys = true;
+        //static string cmdprompt;
+        static void Main(string[] args)
+        {
+            RegistryKey reg = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            reg.SetValue("Arma 3: Exile Server Chernarus ", Assembly.GetExecutingAssembly().Location);
+            Console.WriteLine("Arma 3: Exile Server Chernarus (type cmds for a lit of commands)");
+            Console.WriteLine("Starting all threads!");
+
+            //thread names
+            Thread oneThread = new Thread(new ThreadStart(firstthread));
+            Thread twoThread = new Thread(new ThreadStart(secondthread));
+            Thread threeThread = new Thread(new ThreadStart(thirdthread));
+
+            //starting all the threads
+            twoThread.Start();
+            threeThread.Start();
+
+            //All the threads have started.
+            Console.WriteLine("All threads have started.");
+
+            Console.WriteLine("Starting the game server.");
+
+            System.Diagnostics.Process proc = new System.Diagnostics.Process();
+            proc.StartInfo.FileName = "C://Users/xdelt/Desktop/Exile Server Chernarus/steamapps/common/Arma 3 Server/StartDay.bat";
+            proc.StartInfo.WorkingDirectory = "C://Users/xdelt/Desktop/Exile Server Chernarus/steamapps/common/Arma 3 Server";
+            proc.Start();
+
+            Console.WriteLine("Game server started.");
+
+            oneThread.Start();
+        }
+
+        //This thread mehtod will run a clock and all the events
+        static void firstthread()
+        {
+            //Start batch files (Day)
+            System.Diagnostics.Process proc = new System.Diagnostics.Process();
+            proc.StartInfo.FileName = "C://Users/xdelt/Desktop/Exile Server Chernarus/steamapps/common/Arma 3 Server/StartDay.bat";
+            proc.StartInfo.WorkingDirectory = "C://Users/xdelt/Desktop/Exile Server Chernarus/steamapps/common/Arma 3 Server";
+
+            //Restarts for (Night)
+            System.Diagnostics.Process procnight = new System.Diagnostics.Process();
+            procnight.StartInfo.FileName = "C://Users/xdelt/Desktop/Exile Server Chernarus/steamapps/common/Arma 3 Server/StartNight.bat";
+            procnight.StartInfo.WorkingDirectory = "C://Users/xdelt/Desktop/Exile Server Chernarus/steamapps/common/Arma 3 Server";
+            //This sets the application to kill in the server
+            string pname = "arma3server";
+            // This actaully is the timer that restarts the server
+            while (true)
+            {
+                Thread.Sleep(15000); //Every 15 seconds its checks
+                DateTime localMachineTime = DateTime.Now;
+                string ComputersTime = localMachineTime.ToString("HH:mm");
+
+                ///////////////////////////////////////
+                //this is the 11 pm resart
+                ///////////////////////////////////////
+                if (ComputersTime == "23:00")
+                {
+
+                    //kill the application
+                    Console.WriteLine("Killing the application.");
+                    foreach (Process ArmaApp in Process.GetProcesses())
+                    {
+                        if (ArmaApp.ProcessName.Equals(pname))
+                        {
+                            try
+                            {
+                                ArmaApp.Kill();
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+                        }
+                    }
+                    Console.WriteLine("Killed the application.");
+                    System.Threading.Thread.Sleep(20000); //wait 20 seconds
+
+                    Console.WriteLine("Game server starting...");
+
+                    //restore the application
+                    proc.Start();
+                    Console.WriteLine("Game server started.");
+                    System.Threading.Thread.Sleep(20000);
+                }
+
+                ///////////////////////////////////////
+                //this is the 2 am resart
+                ///////////////////////////////////////
+                if (ComputersTime == "02:00")
+                {
+
+                    //kill the application
+                    Console.WriteLine("Killing the application.");
+                    foreach (Process ArmaApp in Process.GetProcesses())
+                    {
+                        if (ArmaApp.ProcessName.Equals(pname))
+                        {
+                            try
+                            {
+                                ArmaApp.Kill();
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+                        }
+                    }
+                    Console.WriteLine("Killed the application.");
+                    System.Threading.Thread.Sleep(20000); //wait 20 seconds
+
+                    Console.WriteLine("Game server starting...");
+
+                    //restore the application
+                    proc.Start();
+                    Console.WriteLine("Game server started.");
+                    System.Threading.Thread.Sleep(20000);
+                }
+
+                ///////////////////////////////////////
+                //this is the 5 am resart
+                ///////////////////////////////////////
+                if (ComputersTime == "05:00")
+                {
+
+                    //kill the application
+                    Console.WriteLine("Killing the application.");
+                    foreach (Process ArmaApp in Process.GetProcesses())
+                    {
+                        if (ArmaApp.ProcessName.Equals(pname))
+                        {
+                            try
+                            {
+                                ArmaApp.Kill();
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+                        }
+                    }
+                    Console.WriteLine("Killed the application.");
+                    System.Threading.Thread.Sleep(20000); //wait 20 seconds
+
+                    Console.WriteLine("Game server starting...");
+
+                    //restore the application
+                    proc.Start();
+                    Console.WriteLine("Game server started.");
+                    System.Threading.Thread.Sleep(20000);
+                }
+
+                ///////////////////////////////////////
+                //this is the 8 am resart
+                ///////////////////////////////////////
+                if (ComputersTime == "08:00")
+                {
+
+                    //kill the application
+                    Console.WriteLine("Killing the application.");
+                    foreach (Process ArmaApp in Process.GetProcesses())
+                    {
+                        if (ArmaApp.ProcessName.Equals(pname))
+                        {
+                            try
+                            {
+                                ArmaApp.Kill();
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+                        }
+                    }
+                    Console.WriteLine("Killed the application.");
+                    System.Threading.Thread.Sleep(20000); //wait 20 seconds
+
+                    Console.WriteLine("Game server starting...");
+
+                    //restore the application
+                    proc.Start();
+                    Console.WriteLine("Game server started.");
+                    System.Threading.Thread.Sleep(20000);
+                }
+
+                ///////////////////////////////////////
+                //this is the 11 am resart
+                ///////////////////////////////////////
+                if (ComputersTime == "11:00")
+                {
+
+                    //kill the application
+                    Console.WriteLine("Killing the application.");
+                    foreach (Process ArmaApp in Process.GetProcesses())
+                    {
+                        if (ArmaApp.ProcessName.Equals(pname))
+                        {
+                            try
+                            {
+                                ArmaApp.Kill();
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+                        }
+                    }
+                    Console.WriteLine("Killed the application.");
+                    System.Threading.Thread.Sleep(20000); //wait 20 seconds
+
+                    Console.WriteLine("Game server starting...");
+
+                    //restore the application
+                    proc.Start();
+                    Console.WriteLine("Game server started.");
+                    System.Threading.Thread.Sleep(20000);
+                }
+
+                ///////////////////////////////////////
+                //this is the 2 pm resart
+                ///////////////////////////////////////
+                if (ComputersTime == "14:00")
+                {
+
+                    //kill the application
+                    Console.WriteLine("Killing the application.");
+                    foreach (Process ArmaApp in Process.GetProcesses())
+                    {
+                        if (ArmaApp.ProcessName.Equals(pname))
+                        {
+                            try
+                            {
+                                ArmaApp.Kill();
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+                        }
+                    }
+                    Console.WriteLine("Killed the application.");
+                    System.Threading.Thread.Sleep(20000); //wait 20 seconds
+
+                    Console.WriteLine("Game server starting...");
+
+                    //restore the application
+                    proc.Start();
+                    Console.WriteLine("Game server started.");
+                    System.Threading.Thread.Sleep(20000);
+                }
+
+                ///////////////////////////////////////
+                //this is the 5 pm resart
+                ///////////////////////////////////////
+                if (ComputersTime == "17:00")
+                {
+
+                    //kill the application
+                    Console.WriteLine("Killing the application.");
+                    foreach (Process ArmaApp in Process.GetProcesses())
+                    {
+                        if (ArmaApp.ProcessName.Equals(pname))
+                        {
+                            try
+                            {
+                                ArmaApp.Kill();
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+                        }
+                    }
+                    Console.WriteLine("Killed the application.");
+                    System.Threading.Thread.Sleep(20000); //wait 20 seconds
+
+                    Console.WriteLine("Game server starting...");
+
+                    //restore the application
+                    proc.Start();
+                    Console.WriteLine("Game server started.");
+                    System.Threading.Thread.Sleep(20000);
+                }
+
+                ///////////////////////////////////////
+                //this is the 8 pm resart
+                ///////////////////////////////////////
+                if (ComputersTime == "20:00")
+                {
+
+                    //kill the application
+                    Console.WriteLine("Killing the application.");
+                    foreach (Process ArmaApp in Process.GetProcesses())
+                    {
+                        if (ArmaApp.ProcessName.Equals(pname))
+                        {
+                            try
+                            {
+                                ArmaApp.Kill();
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+                        }
+                    }
+                    Console.WriteLine("Killed the application.");
+                    System.Threading.Thread.Sleep(20000); //wait 20 seconds
+
+                    Console.WriteLine("Game server starting...");
+
+                    //restore the application
+                    proc.Start();
+                    Console.WriteLine("Game server started.");
+                    System.Threading.Thread.Sleep(20000);
+                }
+            }
+        }
+
+        //This thread method runs all base commands
+        static void secondthread()
+        {
+            //The while statment that runs forever unless timer goes off
+            //NOTE: none of this is working yet
+            while (runningsys == true)
+            {
+                Console.Write("Chernarus:");
+                string cmdprompt = Console.ReadLine();
+
+                if (cmdprompt == "show sch")
+                {
+                    Console.WriteLine("Showing all Scheduled events!");
+                }
+                else if (cmdprompt == "force kill")
+                {
+                    Console.WriteLine("Force killing all the .bats");
+                }
+                else if (cmdprompt == "restore application")
+                {
+                    Console.WriteLine("Restoring the correct timed application.");
+                }
+                else if (cmdprompt == "pauseall")
+                {
+                    Console.WriteLine("Pausing all restart timers and settings.");
+                }
+                else if (cmdprompt == "dev mode")
+                {
+                    Console.WriteLine("Entering dev mode, can fix server if needed.");
+                }
+                else if (cmdprompt == "cmds")
+                {
+                    Console.WriteLine("\nShowing Commands");
+                    Console.WriteLine("show sch: Shows all Schduled events");
+                    Console.WriteLine("force kill: Force kill .bats running");
+                    Console.WriteLine("restore application: Restroing the timed schedule and start.bat");
+                    Console.WriteLine("pauseall: Pausing all restart timers and settings.");
+                    Console.WriteLine("dev mode: Stopping everything, except command to restore applcation.\n");
+                }
+                else
+                {
+                    Console.WriteLine("Didn't type a valid response");
+                }
+            }
+        }
+
+        static void thirdthread()
+        {
+
+            //Start batch files
+            System.Diagnostics.Process proc = new System.Diagnostics.Process();
+            proc.StartInfo.FileName = "C://Users/xdelt/Desktop/Exile Server Chernarus/steamapps/common/Arma 3 Server/StartDay.bat";
+            proc.StartInfo.WorkingDirectory = "C://Users/xdelt/Desktop/Exile Server Chernarus/steamapps/common/Arma 3 Server";
+
+            //This thread will make sure the application never closes without its want to.
+            //if you ever need to close the aplcaition shut down this window.
+            while (true)
+            {
+                Process[] pname = Process.GetProcessesByName("arma3server.exe");
+                if (pname.Length < 0)
+                {
+                    //checks again after 2 minutes
+                    Thread.Sleep(120000);
+                    if (pname.Length < 0)
+                    {
+                        //Starts the process
+                        proc.Start();
+                    }
+                }
+            }
+        }
+    }
+}
